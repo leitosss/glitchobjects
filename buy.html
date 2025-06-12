@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprar Glitchobject</title>
+    <meta name="description" content="Purchase unique digital objects with glitch and futuristic aesthetics on Glitchobjects.">
+    <meta name="keywords" content="glitch, digital objects, buy, purchase, glitch art, futuristic design">
+    <meta name="author" content="Glitchobjects">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Dark background for futuristic feel */
+            color: #e0e0e0; /* Light text color */
+            cursor: default; /* Ensure default cursor for the body */
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #8b5cf6; /* Purple */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal specific styles (reused from index.html) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #8b5cf6; /* Purple border */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover {
+            color: #ec4899; /* Pink on hover */
+        }
+
+        /* Glitch Effect for Error Modal */
+        .glitch-text {
+            animation: glitch-anim 1s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            15% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            16% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            18% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            19% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            20% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            25% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            30% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            35% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            40% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            45% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            55% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            60% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            65% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            70% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            75% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            80% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            85% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            90% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            95% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            100% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+        }
+
+        /* Prevent text cursor on interactive elements */
+        a, button {
+            cursor: pointer;
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8608135527208109"
+     crossorigin="anonymous"></script>
+</head>
+<body class="antialiased">
+    <!-- Header section (simplified for buy page) -->
+    <header class="bg-gray-900 text-white p-4 md:p-6 shadow-xl rounded-b-xl mx-auto max-w-7xl mt-4 flex items-center justify-between">
+        <div class="logo">
+            <a href="index.html" class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 transition-all duration-300">
+                <h1>GLITCHOBJECTS</h1>
+            </a>
+        </div>
+        <a href="index.html" class="py-2 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-md hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 text-sm">
+            Volver al Inicio
+        </a>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8 mt-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+            Detalle del Glitchobject
+        </h2>
+
+        <div id="product-detail-container" class="flex flex-col md:flex-row justify-center items-start gap-8">
+            <!-- Product Detail Card -->
+            <div id="object-card" class="w-full md:w-2/3 lg:w-1/2 bg-gray-800 rounded-lg shadow-xl p-6 flex flex-col items-center text-center">
+                <div class="relative w-full h-64 md:h-80 bg-gray-700 flex items-center justify-center mb-4 rounded-md overflow-hidden">
+                    <div class="spinner absolute" style="display: block;"></div>
+                    <img id="object-image" src="" alt="Glitchobject" class="w-full h-full object-cover rounded-md transition-opacity duration-300 opacity-0" onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';" onerror="this.src='https://placehold.co/600x400/000000/FF0000?text=ERROR'; this.style.opacity='1'; this.previousElementSibling.style.display='none';">
+                </div>
+                <h3 id="object-name" class="text-3xl font-bold text-cyan-300 mb-2">Cargando...</h3>
+                <p id="object-description" class="text-gray-400 text-base leading-relaxed mb-4"></p>
+                <p class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-400 mb-6">
+                    Precio: <span id="object-price">$?.?? USD</span>
+                </p>
+
+                <button id="buy-now-btn" class="mt-4 w-full py-3 px-6 bg-gradient-to-r from-green-600 to-teal-600 text-white font-bold rounded-md hover:from-green-700 hover:to-teal-700 transition-all duration-300 text-lg flex items-center justify-center">
+                    🛒 Comprar Ahora
+                </button>
+                <button id="object-story-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-md hover:from-purple-700 hover:to-pink-700 transition-all duration-300 text-sm flex items-center justify-center">
+                    ✨ Generar Historia Glitch ✨
+                </button>
+                <button id="marketing-pitch-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 text-sm flex items-center justify-center">
+                    ✨ Generar Argumento de Marketing ✨
+                </button>
+                <button id="add-to-collection-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold rounded-md hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 text-sm flex items-center justify-center">
+                    📦 Guardar en mi Colección
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Glitch Story Modal (reused from index.html) -->
+    <div id="glitch-story-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideGlitchStoryModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">✨ Historia Glitch ✨</h3>
+            <div id="glitch-story-content" class="text-gray-300 text-base leading-relaxed">
+                <!-- Glitch story will be loaded here -->
+            </div>
+            <div id="glitch-story-loading" class="flex justify-center items-center mt-4 hidden">
+                <div class="spinner mr-2"></div> Generando historia...
+            </div>
+        </div>
+    </div>
+
+    <!-- Marketing Pitch Modal (NEW) -->
+    <div id="marketing-pitch-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideMarketingPitchModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-4">✨ Argumento de Marketing Glitch ✨</h3>
+            <div id="marketing-pitch-content" class="text-gray-300 text-base leading-relaxed">
+                <!-- Marketing pitch will be loaded here -->
+            </div>
+            <div id="marketing-pitch-loading" class="flex justify-center items-center mt-4 hidden">
+                <div class="spinner mr-2"></div> Generando argumento...
+            </div>
+        </div>
+    </div>
+
+    <!-- Glitch Error Modal (NEW) -->
+    <div id="glitch-error-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3 text-center border-red-500">
+            <button class="close-button text-red-400 hover:text-red-600" onclick="hideGlitchErrorModal()">&times;</button>
+            <h3 class="text-3xl font-bold text-red-500 mb-4 glitch-text">
+                ERROR DE TRANSMISIÓN
+            </h3>
+            <p class="text-red-300 text-lg leading-relaxed glitch-text">
+                <span class="block mb-2">La transacción no pudo ser procesada debido a una interferencia cuántica.</span>
+                <span class="block">Intenta de nuevo más tarde, o contacta al administrador de la red.</span>
+                <span class="block mt-4 text-sm text-red-400">Código de error: [0x80070002_GLITCH_FAIL]</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Data for generating rare objects (copied from index.html for self-containment)
+        const ADJECTIVES = ["Curious", "Alien", "Ancient", "New", "Shining", "Mysterious", "Useless", "Fantastic", "Absurd", "Rare", "Unique", "Peculiar"];
+        const NOUNS = ["Artifact", "Gizmo", "Device", "Machine", "Item", "Object", "Trinket", "Gem", "Relic", "Amulet", "Nugget"];
+        const DESCRIPTIONS_PARTS = [
+            "emerging from an unknown dimension",
+            "defying the laws of physics",
+            "perfect for collectors of the bizarre",
+            "with no apparent utility, yet fascinating",
+            "capable of generating existential questions",
+            "a hidden treasure from the digital age",
+            "emitting a soft cosmic hum",
+            "designed for a forgotten purpose",
+            "found in the depths of the internet",
+            "possessing never-before-seen properties",
+            "once thought to be extinct",
+            "perfect for decorating any absurd corner"
+        ];
+
+        // Array of abstract/glitch-like image URLs (same as in index.html)
+        const GLITCH_IMAGE_URLS = [
+            'https://images.unsplash.com/photo-1579547621867-0c33a9212001?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Abstract colorful
+            'https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Gradient lines
+            'https://images.unsplash.com/photo-1601758284687-c867200742b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Abstract light streaks
+            'https://images.unsplash.com/photo-1510915228385-fe9ee5360092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Circuit board like
+            'https://images.unsplash.com/photo-1518621736915-f3b14073010b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Blue abstract lines
+            'https://images.unsplash.com/photo-1549490349-011218520297?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Glitch effect
+            'https://images.unsplash.com/photo-1582218080703-9037061d436a?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Digital art
+            'https://images.unsplash.com/photo-1581092911956-6548545e81f7?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Abstract lines
+            'https://images.unsplash.com/photo-1507525428034-b723cf961c3e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Abstract water/light
+            'https://images.unsplash.com/photo-1550745165-9dd0a04ce88d?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop' // Abstract digital
+        ];
+
+        // Global array to store generated objects for easy access
+        // This array is primarily for fallback if sessionStorage fails or for direct URL access
+        let allGeneratedObjects = [];
+
+        /**
+         * Generates a random object name using adjectives and nouns.
+         * @returns {string} The generated object name.
+         */
+        function generateObjectName() {
+            const adjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+            const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
+            return `${adjective} ${noun}`;
+        }
+
+        /**
+         * Generates a random description for the object.
+         * @returns {string} The generated object description.
+         */
+        function generateObjectDescription() {
+            const descriptionPart = DESCRIPTIONS_PARTS[Math.floor(Math.random() * DESCRIPTIONS_PARTS.length)];
+            return `This ${generateObjectName().toLowerCase()} is ${descriptionPart}.`;
+        }
+
+        /**
+         * Generates a glitch-themed image URL from a predefined list.
+         * @returns {string} The glitch image URL.
+         */
+        function getGlitchImageUrl() { // Renamed from getPlaceholderImageUrl
+            return GLITCH_IMAGE_URLS[Math.floor(Math.random() * GLITCH_IMAGE_URLS.length)];
+        }
+
+        /**
+         * Represents a rare object with its properties.
+         */
+        class RareObject {
+            constructor(id = crypto.randomUUID()) { // Allow passing ID for specific objects
+                this.id = id;
+                this.name = generateObjectName();
+                this.description = generateObjectDescription();
+                this.imageUrl = getGlitchImageUrl(); // Using the new function
+                this.slug = this.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                this.price = (Math.random() * (99.99 - 0.99) + 0.99).toFixed(2); // Random price for demonstration
+            }
+        }
+
+        /**
+         * Generates a specified number of rare objects and stores them globally.
+         * This function is primarily a fallback/initialization for direct page access.
+         * @param {number} numObjects - The number of objects to generate.
+         */
+        function initializeGlobalObjects(numObjects) {
+            if (allGeneratedObjects.length === 0) {
+                for (let i = 0; i < numObjects; i++) {
+                    allGeneratedObjects.push(new RareObject());
+                }
+            }
+        }
+
+        /**
+         * Finds an object by its ID in the global list.
+         * This is a fallback; sessionStorage is the primary method for buy.html.
+         * @param {string} id - The ID of the object to find.
+         * @returns {RareObject|undefined} The found object or undefined if not found.
+         */
+        function findObjectById(id) {
+            initializeGlobalObjects(50); // Ensure some objects exist if this fallback is hit
+            return allGeneratedObjects.find(obj => obj.id === id);
+        }
+
+        // --- Glitch Story Modal Functions (reused from index.html) ---
+        const glitchStoryModal = document.getElementById('glitch-story-modal');
+        const glitchStoryContent = document.getElementById('glitch-story-content');
+        const glitchStoryLoading = document.getElementById('glitch-story-loading');
+
+        async function showGlitchStoryModal(objectName, objectDescription) {
+            glitchStoryModal.classList.remove('hidden');
+            glitchStoryContent.innerHTML = '';
+            glitchStoryLoading.classList.remove('hidden');
+            // Increment achievement for generating stories
+            if (typeof incrementAchievement === 'function') { // Check if function exists (from index.html)
+                incrementAchievement('storiesGenerated');
+            }
+
+            try {
+                const prompt = `Generate a short, quirky, and slightly absurd origin story or purpose for a 'Glitchobject' named '${objectName}' which is currently described as '${objectDescription}'. Focus on its 'glitch' or 'digital anomaly' aspect. Make it sound like it emerged from a digital error or a corrupted data stream, suitable for a futuristic, cyberpunk aesthetic. Keep it concise, around 3-4 sentences.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "AIzaSyA1FFsAyYXx60CzdcfSojquKgxLUMr4Qv0";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    glitchStoryContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    glitchStoryContent.innerHTML = '<p class="text-red-400">Error al generar la historia. Inténtalo de nuevo.</p>';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                glitchStoryContent.innerHTML = '<p class="text-red-400">Hubo un problema al conectar con la IA. Por favor, inténtalo más tarde.</p>';
+            } finally {
+                glitchStoryLoading.classList.add('hidden');
+            }
+        }
+
+        function hideGlitchStoryModal() {
+            glitchStoryModal.classList.add('hidden');
+        }
+
+        // --- Marketing Pitch Modal Functions (reused from index.html) ---
+        const marketingPitchModal = document.getElementById('marketing-pitch-modal');
+        const marketingPitchContent = document.getElementById('marketing-pitch-content');
+        const marketingPitchLoading = document.getElementById('marketing-pitch-loading');
+
+        async function showMarketingPitchModal(objectName, objectDescription, objectPrice) {
+            marketingPitchModal.classList.remove('hidden');
+            marketingPitchContent.innerHTML = '';
+            marketingPitchLoading.classList.remove('hidden');
+
+            try {
+                const prompt = `Generate a short, compelling, and quirky marketing pitch (2-3 sentences) for a 'Glitchobject' named '${objectName}' which is described as '${objectDescription}' and costs ${objectPrice}. The pitch should appeal to a teenage audience, highlighting its unique, absurd, or futuristic qualities. Make it sound like an advertisement for something truly bizarre and desirable.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "AIzaSyA1FFsAyYXx60CzdcfSojquKgxLUMr4Qv0";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    marketingPitchContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    marketingPitchContent.innerHTML = '<p class="text-red-400">Error al generar el argumento de marketing. Inténtalo de nuevo.</p>';
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API for marketing pitch:', error);
+                marketingPitchContent.innerHTML = '<p class="text-red-400">Hubo un problema al conectar con la IA. Por favor, inténtalo más tarde.</p>';
+            } finally {
+                marketingPitchLoading.classList.add('hidden');
+            }
+        }
+
+        function hideMarketingPitchModal() {
+            marketingPitchModal.classList.add('hidden');
+        }
+
+        // --- Glitch Error Modal Functions (reused from index.html) ---
+        const glitchErrorModal = document.getElementById('glitch-error-modal');
+
+        function showGlitchErrorModal() {
+            glitchErrorModal.classList.remove('hidden');
+        }
+
+        function hideGlitchErrorModal() {
+            glitchErrorModal.classList.add('hidden');
+        }
+
+
+        // --- Achievements Functions (copied from index.html for self-containment) ---
+        function initializeAchievements() {
+            const defaultAchievements = {
+                glitchObjectsViewed: 0,
+                storiesGenerated: 0,
+                purchasesMade: 0
+            };
+            let achievements = JSON.parse(localStorage.getItem('glitchAchievements')) || defaultAchievements;
+            localStorage.setItem('glitchAchievements', JSON.stringify(achievements));
+        }
+
+        function incrementAchievement(type) {
+            let achievements = JSON.parse(localStorage.getItem('glitchAchievements'));
+            if (achievements) {
+                achievements[type]++;
+                localStorage.setItem('glitchAchievements', JSON.stringify(achievements));
+            }
+        }
+
+        // --- My Collection Functions (copied from index.html for self-containment) ---
+        function initializeCollection() {
+            let collection = JSON.parse(localStorage.getItem('glitchCollection')) || [];
+            localStorage.setItem('glitchCollection', JSON.stringify(collection));
+        }
+
+        function addGlitchobjectToCollection(object) {
+            let collection = JSON.parse(localStorage.getItem('glitchCollection'));
+            // Prevent duplicates
+            if (!collection.some(item => item.id === object.id)) {
+                collection.push(object);
+                localStorage.setItem('glitchCollection', JSON.stringify(collection));
+                // Optional: show a small notification that item was added
+            }
+        }
+
+
+        // --- Product Detail Logic for Buy Page ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const objectId = urlParams.get('id');
+
+        const objectCard = document.getElementById('object-card');
+        const objectImage = document.getElementById('object-image');
+        const objectName = document.getElementById('object-name');
+        const objectDescription = document.getElementById('object-description');
+        const objectPrice = document.getElementById('object-price');
+        const objectStoryBtn = document.getElementById('object-story-btn');
+        const buyNowBtn = document.getElementById('buy-now-btn');
+        const marketingPitchBtn = document.getElementById('marketing-pitch-btn');
+        const addToCollectionBtn = document.getElementById('add-to-collection-btn'); // NEW
+
+        /**
+         * Loads and displays the single object for purchase.
+         */
+        function loadProductDetail() {
+            // Retrieve the object from sessionStorage
+            const storedObjectString = sessionStorage.getItem('selectedGlitchobject');
+            let obj = null;
+
+            if (storedObjectString) {
+                try {
+                    const storedObject = JSON.parse(storedObjectString);
+                    // Verify that the ID from the URL matches the stored object's ID
+                    if (storedObject.id === objectId) {
+                        obj = storedObject;
+                    }
+                } catch (e) {
+                    console.error("Error parsing stored object from sessionStorage:", e);
+                }
+            }
+
+            if (obj) {
+                objectImage.src = obj.imageUrl;
+                objectImage.alt = `Image of ${obj.name}`;
+                objectName.textContent = obj.name;
+                objectDescription.textContent = obj.description;
+                objectPrice.textContent = `$${obj.price} USD`;
+
+                objectStoryBtn.dataset.objectName = obj.name;
+                objectStoryBtn.dataset.objectDescription = obj.description;
+                objectStoryBtn.onclick = () => showGlitchStoryModal(obj.name, obj.description);
+
+                marketingPitchBtn.dataset.objectName = obj.name;
+                marketingPitchBtn.dataset.objectDescription = obj.description;
+                marketingPitchBtn.dataset.objectPrice = objectPrice.textContent;
+                marketingPitchBtn.onclick = () => showMarketingPitchModal(
+                    marketingPitchBtn.dataset.objectName,
+                    marketingPitchBtn.dataset.objectDescription,
+                    marketingPitchBtn.dataset.objectPrice
+                );
+
+                buyNowBtn.onclick = () => {
+                    showGlitchErrorModal();
+                    // Increment achievement for purchases
+                    if (typeof incrementAchievement === 'function') { // Check if function exists
+                        incrementAchievement('purchasesMade');
+                    }
+                };
+
+                // Add to collection button functionality (NEW)
+                addToCollectionBtn.onclick = () => {
+                    if (typeof addGlitchobjectToCollection === 'function') { // Check if function exists
+                        addGlitchobjectToCollection(obj);
+                        alert(`"${obj.name}" ha sido añadido a tu colección.`);
+                    } else {
+                        alert("Error: La función para añadir a la colección no está disponible.");
+                    }
+                };
+
+                // Increment achievement for viewing this object
+                if (typeof incrementAchievement === 'function') { // Check if function exists
+                    incrementAchievement('glitchObjectsViewed');
+                }
+
+            } else {
+                objectName.textContent = "Glitchobject no encontrado.";
+                objectDescription.textContent = "El ID del objeto no es válido o el objeto no existe. Por favor, vuelve a la página principal y selecciona un objeto.";
+                objectPrice.textContent = "$?.?? USD";
+                objectStoryBtn.classList.add('hidden');
+                buyNowBtn.classList.add('hidden');
+                marketingPitchBtn.classList.add('hidden');
+                addToCollectionBtn.classList.add('hidden'); // Hide if object not found
+            }
+        }
+
+        // Initial load of product detail when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAchievements(); // Initialize achievements on buy page load
+            initializeCollection();   // Initialize collection on buy page load
+            loadProductDetail();
+        });
+    </script>
+</body>
+</html>

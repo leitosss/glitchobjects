@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glitchobjects - Digital Products with Glitch Futurism</title>
+    <meta name="description" content="Explore Glitchobjects: the ultimate store for unique digital products, glitch art, vintage tech, and futuristic design. Immerse yourself in the digital error aesthetic!">
+    <meta name="keywords" content="glitch, digital objects, glitch products, digital art, futuristic design, retro tech, digital aesthetic, GLITCHOBJECTS, cyber art, cyberpunk, unique objects, glitch art">
+    <meta name="author" content="Glitchobjects">
+    <meta property="og:title" content="Glitchobjects - Glitch Digital Shop">
+    <meta property="og:description" content="Digital art and objects with a glitch/futuristic aesthetic. Enter the GLITCHOBJECTS universe.">
+    <meta property="og:image" content="https://placehold.co/1200x630/4A00B0/FFFFFF?text=GLITCHOBJECTS">
+    <meta property="og:url" content="https://www.glitchobjects.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles for Inter font and scroll behavior */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Dark background for futuristic feel */
+            color: #e0e0e0; /* Light text color */
+            cursor: default; /* Ensure default cursor for the body */
+        }
+        /* Custom scrollbar for aesthetic */
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .carousel-container::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(to right, #8b5cf6, #ec4899); /* Purple to pink gradient */
+            border-radius: 10px;
+        }
+        .carousel-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to right, #a78bfa, #f472b6);
+        }
+
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #8b5cf6; /* Purple */
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid #8b5cf6; /* Purple border */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover {
+            color: #ec4899; /* Pink on hover */
+        }
+
+        /* Full screen menu overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .menu-overlay .close-button {
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.5rem;
+        }
+        .menu-overlay nav a {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+            text-shadow: 0 0 5px rgba(139, 92, 246, 0.5);
+        }
+        .menu-overlay nav a:hover {
+            color: #8b5cf6;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+        }
+
+        /* Glitch Effect for Mini-Game */
+        .glitch-game-text {
+            animation: glitch-anim 1s infinite;
+            position: relative;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            15% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            16% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            18% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            19% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            20% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            25% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            30% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            35% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            40% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            45% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            55% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            60% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            65% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            70% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            75% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            80% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            85% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+            90% {
+                text-shadow: -0.05em -0.025em 0 #f0f, 0.025em 0.025em 0 #0ff, -0.05em -0.05em 0 #ff0;
+            }
+            95% {
+                text-shadow: 0.025em 0.05em 0 #f0f, -0.025em -0.05em 0 #0ff, -0.05em 0 0 #ff0;
+            }
+            100% {
+                text-shadow: 0.05em 0 0 #f0f, -0.05em -0.025em 0 #0ff, -0.025em 0.05em 0 #ff0;
+            }
+        }
+
+        /* Prevent text cursor on interactive elements */
+        a, button {
+            cursor: pointer;
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8608135527208109"
+     crossorigin="anonymous"></script>
+</head>
+<body class="antialiased">
+    <!-- Header section -->
+    <header class="bg-gray-900 text-white p-4 md:p-6 shadow-xl rounded-b-xl mx-auto max-w-7xl mt-4 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="#" class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600 transition-all duration-300">
+                <h1>GLITCHOBJECTS</h1>
+            </a>
+        </div>
+        <!-- Navigation Icons -->
+        <div class="flex space-x-4 md:space-x-6">
+            <div class="iconos">
+                <button aria-label="Search" class="text-gray-300 hover:text-purple-400 transition-colors duration-200" onclick="showSearchModal()">
+                    <!-- Search Icon (inline SVG for better control and no external requests) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search">
+                        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="iconos">
+                <button aria-label="News and Notifications" class="text-gray-300 hover:text-purple-400 transition-colors duration-200" onclick="showNewsModal()">
+                    <!-- Bell Icon (News/Notifications) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell">
+                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="iconos">
+                <button aria-label="Menu" class="text-gray-300 hover:text-purple-400 transition-colors duration-200" onclick="toggleMenuOverlay()">
+                    <!-- Menu Icon (Hamburger) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+                        <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="container mx-auto p-4 md:p-8 mt-8">
+        <!-- Glitch del Día Section (NEW) -->
+        <section class="mb-12 bg-gray-800 rounded-xl shadow-2xl p-6 md:p-8 border border-purple-600">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+                ✨ Glitch del Día ✨
+            </h2>
+            <div id="daily-glitch-container" class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div class="relative w-full md:w-1/2 h-64 md:h-80 bg-gray-700 flex items-center justify-center rounded-md overflow-hidden flex-shrink-0">
+                    <div class="spinner absolute" id="daily-glitch-spinner"></div>
+                    <img id="daily-glitch-image" src="" alt="Glitch del Día" class="w-full h-full object-cover rounded-md transition-opacity duration-300 opacity-0 " onload="this.style.opacity='1'; document.getElementById('daily-glitch-spinner').style.display='none';" onerror="this.src='https://placehold.co/600x400/000000/FF0000?text=ERROR'; this.style.opacity='1'; document.getElementById('daily-glitch-spinner').style.display='none';">
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h3 id="daily-glitch-name" class="text-2xl md:text-3xl font-bold text-cyan-300 mb-2">Cargando Glitch...</h3>
+                    <p id="daily-glitch-description" class="text-gray-400 text-base leading-relaxed mb-4">Descubre la anomalía más reciente de la red.</p>
+                    <p class="text-xl md:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 mb-4">
+                        Precio Corrupto: <span id="daily-glitch-price">$?.?? USD</span>
+                    </p>
+                    <a id="daily-glitch-link" href="#" class="inline-block py-2 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-md hover:from-purple-700 hover:to-pink-700 transition-all duration-300 text-sm">
+                        Ver Glitch del Día
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carousel Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                Obiecta Nova et Curiosa
+            </h2>
+            <div class="relative">
+                <div id="carousel-container" class="carousel-container flex overflow-x-scroll snap-x snap-mandatory pb-4 space-x-6 scroll-smooth rounded-xl shadow-inner bg-gray-800 p-4">
+                    <!-- Carousel items will be injected here by JavaScript -->
+                    <div class="flex items-center justify-center w-full h-48 text-gray-400">
+                        <div class="spinner mr-2"></div> Loading carousel items...
+                    </div>
+                </div>
+                <!-- Carousel Navigation Buttons -->
+                <button id="carousel-prev" class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-75 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-colors duration-200 z-10 hidden md:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left text-white">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button id="carousel-next" class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 bg-opacity-75 p-2 rounded-full shadow-lg hover:bg-opacity-100 transition-colors duration-200 z-10 hidden md:block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right text-white">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Products Grid Section -->
+        <section id="products-grid-section"> <!-- Added ID for navigation -->
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
+                Collectio Glitch
+            </h2>
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product cards will be injected here by JavaScript -->
+                <div class="flex items-center justify-center col-span-full h-48 text-gray-400">
+                    <div class="spinner mr-2"></div> Loading products...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Glitch Story Modal -->
+    <div id="glitch-story-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideGlitchStoryModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">✨ Historia Glitch ✨</h3>
+            <div id="glitch-story-content" class="text-gray-300 text-base leading-relaxed">
+                <!-- Glitch story will be loaded here -->
+            </div>
+            <div id="glitch-story-loading" class="flex justify-center items-center mt-4 hidden">
+                <div class="spinner mr-2"></div> Generando historia...
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideSearchModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">🔍 Buscar Glitchobjects</h3>
+            <div class="flex flex-col md:flex-row gap-4 mb-8">
+                <input type="text" placeholder="Escribe tu búsqueda..." class="flex-grow p-3 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-purple-500">
+                <button class="py-3 px-6 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-md hover:from-cyan-700 hover:to-blue-700 transition-all duration-300">
+                    Buscar
+                </button>
+            </div>
+
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-4">✨ Generar Nombre de Glitchobject ✨</h3>
+            <div class="flex flex-col gap-4">
+                <input type="text" id="glitch-name-input" placeholder="Palabra clave (ej: 'cibernético', 'sueño')" class="p-3 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-green-500">
+                <button class="py-3 px-6 bg-gradient-to-r from-green-600 to-teal-600 text-white font-bold rounded-md hover:from-green-700 hover:to-teal-700 transition-all duration-300" onclick="generateGlitchObjectNameWithAI()">
+                    Generar Nombre
+                </button>
+            </div>
+            <div id="glitch-name-output" class="mt-4 p-4 bg-gray-700 rounded-md border border-gray-600 hidden">
+                <h4 class="font-semibold text-purple-300 mb-2" id="generated-object-name"></h4>
+                <p class="text-sm text-gray-400" id="generated-object-description"></p>
+            </div>
+            <div id="glitch-name-loading" class="flex justify-center items-center mt-4 hidden">
+                <div class="spinner mr-2"></div> Generando nombre...
+            </div>
+        </div>
+    </div>
+
+    <!-- News/Notifications Modal -->
+    <div id="news-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideNewsModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">🔔 Novedades y Anuncios</h3>
+            <div class="space-y-4 text-gray-300">
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">Actualización del Protocolo 1.2.0</h5>
+                    <p class="text-sm">Hemos implementado nuevas funciones de IA para generar descripciones de objetos más inmersivas. ¡Explóralas ahora!</p>
+                    <span class="text-xs text-gray-500">Hace 3 días</span>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">¡Nuevos Glitchobjects Añadidos!</h5>
+                    <p class="text-sm">Descubre nuestra última colección de anomalías digitales directamente de la red oscura.</p>
+                    <span class="text-xs text-gray-500">Hace 1 semana</span>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">Evento de Arte Glitch Próximo</h5>
+                    <p class="text-sm">Mantente atento a los detalles de nuestro próximo evento virtual de arte glitch. ¡No te lo pierdas!</p>
+                    <span class="text-xs text-gray-500">Hace 2 semanas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideAboutModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">👾 Acerca de Glitchobjects</h3>
+            <p class="text-gray-300 text-base leading-relaxed">
+                Glitchobjects es tu portal al universo de lo anómalo digital. Aquí, cada objeto es una manifestación de errores bellamente corruptos, de datos perdidos encontrados y de la estética futurista que emerge del caos cibernético. No vendemos objetos físicos, sino la experiencia de la curiosidad y el asombro que evocan estas creaciones generadas por IA.
+            </p>
+            <p class="text-gray-300 text-base leading-relaxed mt-4">
+                Nuestro objetivo es crear un espacio donde la imaginación se encuentre con la tecnología, ofreciendo una colección en constante evolución de "tonteras" que desafían la lógica y deleitan la vista. ¡Únete a nosotros en este viaje a través del glitch!
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideContactModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">📧 Contacto Glitchobjects</h3>
+            <p class="text-gray-300 mb-4">¿Tienes una anomalía que reportar o una pregunta existencial sobre un Glitchobject? Contáctanos a través de los siguientes canales:</p>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-400 text-sm font-bold mb-2">Nombre:</label>
+                    <input type="text" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:shadow-outline border-gray-600 focus:border-purple-500" placeholder="Tu nombre o alias cibernético">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-400 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:shadow-outline border-gray-600 focus:border-purple-500" placeholder="tu@dominio.com">
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-400 text-sm font-bold mb-2">Mensaje:</label>
+                    <textarea id="message" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 bg-gray-700 text-white leading-tight focus:outline-none focus:shadow-outline border-gray-600 focus:border-purple-500" placeholder="Describe tu anomalía..."></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 px-6 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-md hover:from-cyan-700 hover:to-blue-700 transition-all duration-300">
+                    Enviar Mensaje Corrupto
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Blog Glitch Modal -->
+    <div id="blog-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideBlogModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-4">📰 Blog Glitch: Anomalías Recientes</h3>
+            <div class="space-y-6 text-gray-300">
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h4 class="font-semibold text-purple-300 text-lg mb-1">El Origen del Glitch en la Realidad Virtual</h4>
+                    <p class="text-sm text-gray-400 mb-2">Publicado el 28 de mayo de 2025</p>
+                    <p class="text-base">Un análisis profundo sobre cómo los errores digitales están comenzando a manifestarse en nuestras percepciones de la realidad virtual y sus implicaciones para el futuro.</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h4 class="font-semibold text-purple-300 text-lg mb-1">Entrevista con un Artista de Datos Corruptos</h4>
+                    <p class="text-sm text-gray-400 mb-2">Publicado el 15 de mayo de 2025</p>
+                    <p class="text-base">Conversamos con el enigmático 'Error404', un pionero en la creación de arte a partir de archivos de datos dañados y sistemas fallidos.</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h4 class="font-semibold text-purple-300 text-lg mb-1">Top 5 Glitchobjects Más Absurdos de la Semana</h4>
+                    <p class="text-sm text-gray-400 mb-2">Publicado el 1 de junio de 2025</p>
+                    <p class="text-base">Una selección curada de los objetos generados por IA más extraños y sin sentido que han surgido en nuestros feeds.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements Modal (NEW) -->
+    <div id="achievements-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3">
+            <button class="close-button" onclick="hideAchievementsModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 mb-4">🏆 Logros Glitch 🏆</h3>
+            <div id="achievements-list" class="space-y-4 text-gray-300">
+                <!-- Achievements will be loaded here -->
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">Explorador de la Red Corrupta</h5>
+                    <p class="text-sm">Visita <span id="achievement-views-count">0</span>/100 Glitchobjects.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2 mt-2">
+                        <div id="achievement-views-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">Narrador de Anomalías</h5>
+                    <p class="text-sm">Genera <span id="achievement-stories-count">0</span>/50 historias glitch.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2 mt-2">
+                        <div id="achievement-stories-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-md border border-gray-600">
+                    <h5 class="font-semibold text-purple-300">Comprador de Errores</h5>
+                    <p class="text-sm">"Compra" <span id="achievement-purchases-count">0</span>/10 Glitchobjects.</p>
+                    <div class="w-full bg-gray-600 rounded-full h-2 mt-2">
+                        <div id="achievement-purchases-bar" class="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Collection Modal (NEW) -->
+    <div id="my-collection-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-2/3 lg:w-1/2">
+            <button class="close-button" onclick="hideMyCollectionModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 mb-4">📦 Mi Colección Glitch 📦</h3>
+            <div id="collection-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-96 overflow-y-auto p-2 rounded-md bg-gray-700">
+                <!-- Collected objects will be injected here -->
+                <p id="empty-collection-message" class="col-span-full text-center text-gray-400 hidden">Tu colección está vacía. ¡Empieza a guardar Glitchobjects!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mini-Game Modal (NEW) -->
+    <div id="mini-game-modal" class="modal-overlay hidden">
+        <div class="modal-content w-full md:w-1/2 lg:w-1/3 text-center">
+            <button class="close-button" onclick="hideMiniGameModal()">&times;</button>
+            <h3 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-yellow-500 mb-4 glitch-game-text">
+                🎮 Desencripta el Glitch 🎮
+            </h3>
+            <div id="game-area" class="w-full h-48 bg-gray-700 rounded-md flex items-center justify-center relative overflow-hidden mb-4 border border-red-500">
+                <p id="game-instruction" class="text-lg text-gray-300">Haz clic en el glitch en movimiento para desencriptarlo.</p>
+                <div id="glitch-target" class="absolute bg-red-500 w-8 h-8 rounded-full cursor-pointer hidden"></div>
+            </div>
+            <p id="game-timer" class="text-lg font-bold text-yellow-400 mb-2">Tiempo: 10s</p>
+            <p id="game-score" class="text-lg font-bold text-green-400 mb-4">Puntos: 0</p>
+            <button id="start-game-btn" class="py-2 px-4 bg-gradient-to-r from-green-600 to-teal-600 text-white font-bold rounded-md hover:from-green-700 hover:to-teal-700 transition-all duration-300">
+                Iniciar Juego
+            </button>
+            <div id="game-result" class="mt-4 text-lg hidden">
+                <p id="game-result-text" class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500"></p>
+                <button id="claim-reward-btn" class="mt-4 py-2 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 hidden">
+                    Reclamar Recompensa
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Full-screen Menu Overlay -->
+    <div id="menu-overlay" class="menu-overlay">
+        <button class="close-button" onclick="toggleMenuOverlay()">&times;</button>
+        <nav class="flex flex-col items-center">
+            <a href="#" onclick="toggleMenuOverlay(); window.scrollTo({ top: 0, behavior: 'smooth' });" class="hover:text-purple-400">Inicio</a>
+            <a href="#products-grid-section" onclick="toggleMenuOverlay();" class="hover:text-purple-400">Colección</a>
+            <a href="#" onclick="toggleMenuOverlay(); showAboutModal();" class="hover:text-purple-400">Acerca de</a>
+            <a href="#" onclick="toggleMenuOverlay(); showContactModal();" class="hover:text-purple-400">Contacto</a>
+            <a href="#" onclick="toggleMenuOverlay(); showBlogModal();" class="hover:text-purple-400">Blog Glitch</a>
+            <a href="#" onclick="toggleMenuOverlay(); showAchievementsModal();" class="hover:text-green-400">Logros</a>
+            <a href="#" onclick="toggleMenuOverlay(); showMyCollectionModal();" class="hover:text-blue-400">Mi Colección</a>
+            <a href="#" onclick="toggleMenuOverlay(); showMiniGameModal();" class="hover:text-red-400">Mini-Juego Glitch</a>
+        </nav>
+    </div>
+
+    <!-- Footer section -->
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-12 rounded-t-xl mx-auto max-w-7xl">
+        <div class="container mx-auto px-4 text-center">
+            <h4 class="text-lg font-semibold mb-4">&copy; 2023 GLITCHOBJECTS. Omnia Iura Reservata.</h4>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                    <!-- Facebook Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-facebook">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                    <!-- Twitter Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-twitter">
+                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17-18 11.6 2.2.1 4.4-.6 6-2 1.7-1.4 2.9-3.2 3.2-5.2A8.44 8.44 0 0 0 22 4Z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/glitchobjects" class="text-gray-400 hover:text-purple-400 transition-colors duration-200">
+                    <!-- Instagram Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="lucide lucude-instagram">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="text-sm">Explora, tenta, frange... et iterum conare. Creatum cum passione pro mentibus curiosis.
+                <a href="/terminos" class="text-purple-400 hover:underline ml-2">Termini</a>
+                <a href="/privacidad" class="text-purple-400 hover:underline ml-2">Secretum</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for dynamic content, carousel, and Gemini API integration -->
+    <script>
+        // Data for generating rare objects (similar to Python logic, but in JS)
+        const ADJECTIVES = ["Curious", "Alien", "Ancient", "New", "Shining", "Mysterious", "Useless", "Fantastic", "Absurd", "Rare", "Unique", "Peculiar"];
+        const NOUNS = ["Artifact", "Gizmo", "Device", "Machine", "Item", "Object", "Trinket", "Gem", "Relic", "Amulet", "Nugget"];
+        const DESCRIPTIONS_PARTS = [
+            "emerging from an unknown dimension",
+            "defying the laws of physics",
+            "perfect for collectors of the bizarre",
+            "with no apparent utility, yet fascinating",
+            "capable of generating existential questions",
+            "a hidden treasure from the digital age",
+            "emitting a soft cosmic hum",
+            "designed for a forgotten purpose",
+            "found in the depths of the internet",
+            "possessing never-before-seen properties",
+            "once thought to be extinct",
+            "perfect for decorating any absurd corner"
+        ];
+
+        // NEW: Array of abstract/glitch-like image URLs
+        const GLITCH_IMAGE_URLS = [
+            'https://images.unsplash.com/photo-1579547621867-0c33a9212001?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Abstract colorful
+            'https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Gradient lines
+            'https://images.unsplash.com/photo-1601758284687-c867200742b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Abstract light streaks
+            'https://images.unsplash.com/photo-1510915228385-fe9ee5360092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Circuit board like
+            'https://images.unsplash.com/photo-1518621736915-f3b14073010b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80', // Blue abstract lines
+            'https://images.unsplash.com/photo-1549490349-011218520297?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Glitch effect
+            'https://images.unsplash.com/photo-1582218080703-9037061d436a?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Digital art
+            'https://images.unsplash.com/photo-1581092911956-6548545e81f7?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Abstract lines
+            'https://images.unsplash.com/photo-1507525428034-b723cf961c3e?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop', // Abstract water/light
+            'https://images.unsplash.com/photo-1550745165-9dd0a04ce88d?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop' // Abstract digital
+        ];
+
+        // Global array to store generated objects for easy access
+        let allGeneratedObjects = [];
+
+        /**
+         * Generates a random object name using adjectives and nouns.
+         * @returns {string} The generated object name.
+         */
+        function generateObjectName() {
+            const adjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)];
+            const noun = NOUNS[Math.floor(Math.random() * NOUNS.length)];
+            return `${adjective} ${noun}`;
+        }
+
+        /**
+         * Generates a random description for the object.
+         * @returns {string} The generated object description.
+         */
+        function generateObjectDescription() {
+            const descriptionPart = DESCRIPTIONS_PARTS[Math.floor(Math.random() * DESCRIPTIONS_PARTS.length)];
+            return `This ${generateObjectName().toLowerCase()} is ${descriptionPart}.`;
+        }
+
+        /**
+         * Generates a glitch-themed image URL from a predefined list.
+         * @returns {string} The glitch image URL.
+         */
+        function getGlitchImageUrl() { // Renamed from getPlaceholderImageUrl
+            return GLITCH_IMAGE_URLS[Math.floor(Math.random() * GLITCH_IMAGE_URLS.length)];
+        }
+
+        /**
+         * Represents a rare object with its properties.
+         */
+        class RareObject {
+            constructor(id = crypto.randomUUID()) { // Allow passing ID for specific objects
+                this.id = id;
+                this.name = generateObjectName();
+                this.description = generateObjectDescription();
+                this.imageUrl = getGlitchImageUrl(); // Using the new function
+                this.slug = this.name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''); // Simple slug generation
+                this.price = (Math.random() * (99.99 - 0.99) + 0.99).toFixed(2); // Random price for demonstration
+            }
+        }
+
+        /**
+         * Generates a specified number of rare objects and stores them globally.
+         * This function is now deterministic for the purpose of consistent IDs across pages.
+         * In a real application, you'd fetch this from a backend/database.
+         * @param {number} numObjects - The number of objects to generate.
+         */
+        function initializeGlobalObjects(numObjects) {
+            if (allGeneratedObjects.length === 0) { // Only generate if empty
+                for (let i = 0; i < numObjects; i++) {
+                    allGeneratedObjects.push(new RareObject());
+                }
+            }
+        }
+
+        /**
+         * Finds an object by its ID in the global list.
+         * @param {string} id - The ID of the object to find.
+         * @returns {RareObject|undefined} The found object or undefined if not found.
+         */
+        function findObjectById(id) {
+            // Ensure objects are initialized before searching
+            initializeGlobalObjects(50); // Ensure a consistent set of objects is available
+            return allGeneratedObjects.find(obj => obj.id === id);
+        }
+
+        /**
+         * Creates a carousel item HTML element.
+         * @param {RareObject} object - The rare object data.
+         * @returns {HTMLElement} The created carousel item element.
+         */
+        function createCarouselItem(object) {
+            const item = document.createElement('a');
+            // IMPORTANT: Store the object in sessionStorage before navigating
+            item.onclick = (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                sessionStorage.setItem('selectedGlitchobject', JSON.stringify(object));
+                window.location.href = `buy.html?id=${object.id}`;
+            };
+            item.className = 'carousel-item flex-shrink-0 w-64 md:w-80 snap-center bg-gray-700 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105';
+            item.innerHTML = `
+                <div class="relative w-full h-48 bg-gray-600 flex items-center justify-center">
+                    <div class="spinner absolute" style="display: block;"></div>
+                    <img src="${object.imageUrl}" alt="${object.name}" class="w-full h-full object-cover rounded-t-lg transition-opacity duration-300 opacity-0" onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';" onerror="this.src='https://placehold.co/600x400/000000/FF0000?text=ERROR'; this.style.opacity='1'; this.previousElementSibling.style.display='none';">
+                </div>
+                <div class="p-4">
+                    <h4 class="text-xl font-semibold text-purple-300 mb-2">${object.name}</h4>
+                </div>
+            `;
+            return item;
+        }
+
+        /**
+         * Creates a product card HTML element for the grid, including the Gemini API feature button.
+         * @param {RareObject} object - The rare object data.
+         * @returns {HTMLElement} The created product card element.
+         */
+        function createProductCard(object) {
+            const card = document.createElement('div');
+            card.className = 'producto bg-gray-800 rounded-lg shadow-xl p-4 transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col';
+
+            // Create the <a> element separately
+            const linkElement = document.createElement('a');
+            linkElement.href = `buy.html?id=${object.id}`;
+            linkElement.className = 'block'; // Apply Tailwind block class
+
+            // Attach the click handler using addEventListener
+            linkElement.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                sessionStorage.setItem('selectedGlitchobject', JSON.stringify(object));
+                window.location.href = `buy.html?id=${object.id}`;
+            });
+
+            linkElement.innerHTML = `
+                <div class="relative w-full h-48 bg-gray-700 flex items-center justify-center mb-4 rounded-md overflow-hidden">
+                    <div class="spinner absolute" style="display: block;"></div>
+                    <img src="${object.imageUrl}" alt="${object.name}" class="producto-imagen w-full h-full object-cover rounded-md transition-opacity duration-300 opacity-0" onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';" onerror="this.src='https://placehold.co/600x400/000000/FF0000?text=ERROR'; this.style.opacity='1'; this.previousElementSibling.style.display='none';">
+                </div>
+                <h4 class="text-xl font-bold text-cyan-300 mb-2">${object.name}</h4>
+                <p class="text-sm text-gray-400 flex-grow">${object.description}</p>
+            `;
+
+            // Create the button element separately for Glitch Story
+            const buttonElement = document.createElement('button');
+            buttonElement.className = 'mt-4 w-full py-2 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-md hover:from-purple-700 hover:to-pink-700 transition-all duration-300 text-sm flex items-center justify-center';
+            buttonElement.dataset.objectName = object.name;
+            buttonElement.dataset.objectDescription = object.description;
+            buttonElement.textContent = '✨ Generar Historia Glitch ✨';
+            buttonElement.onclick = () => showGlitchStoryModal(buttonElement.dataset.objectName, buttonElement.dataset.objectDescription);
+
+
+            // Append the link and button to the card
+            card.appendChild(linkElement);
+            card.appendChild(buttonElement);
+
+            return card;
+        }
+
+        // --- Gemini API Integration - Glitch Story Modal ---
+        const glitchStoryModal = document.getElementById('glitch-story-modal');
+        const glitchStoryContent = document.getElementById('glitch-story-content');
+        const glitchStoryLoading = document.getElementById('glitch-story-loading');
+
+        async function showGlitchStoryModal(objectName, objectDescription) {
+            glitchStoryModal.classList.remove('hidden');
+            glitchStoryContent.innerHTML = ''; // Clear previous content
+            glitchStoryLoading.classList.remove('hidden'); // Show loading spinner
+            incrementAchievement('storiesGenerated'); // Increment achievement
+
+            try {
+                const prompt = `Generate a short, quirky, and slightly absurd origin story or purpose for a 'Glitchobject' named '${objectName}' which is currently described as '${objectDescription}'. Focus on its 'glitch' or 'digital anomaly' aspect. Make it sound like it emerged from a digital error or a corrupted data stream, suitable for a futuristic, cyberpunk aesthetic. Keep it concise, around 3-4 sentences.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "AIzaSyA1FFsAyYXx60CzdcfSojquKgxLUMr4Qv0"; // Canvas will automatically provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    glitchStoryContent.innerHTML = `<p>${text}</p>`;
+                } else {
+                    glitchStoryContent.innerHTML = '<p class="text-red-400">Error al generar la historia. Inténtalo de nuevo.</p>';
+                }
+            }
+            catch (error) {
+                console.error('Error calling Gemini API:', error);
+                glitchStoryContent.innerHTML = '<p class="text-red-400">Hubo un problema al conectar con la IA. Por favor, inténtalo más tarde.</p>';
+            } finally {
+                glitchStoryLoading.classList.add('hidden');
+            }
+        }
+
+        function hideGlitchStoryModal() {
+            glitchStoryModal.classList.add('hidden');
+        }
+
+        // --- Header Button Functionality ---
+
+        // Search Modal Functions
+        const searchModal = document.getElementById('search-modal');
+        const glitchNameInput = document.getElementById('glitch-name-input');
+        const generatedObjectName = document.getElementById('generated-object-name');
+        const generatedObjectDescription = document.getElementById('generated-object-description');
+        const glitchNameOutput = document.getElementById('glitch-name-output');
+        const glitchNameLoading = document.getElementById('glitch-name-loading');
+
+        function showSearchModal() {
+            searchModal.classList.remove('hidden');
+            glitchNameOutput.classList.add('hidden'); // Hide previous output on open
+            glitchNameInput.value = ''; // Clear input
+        }
+        function hideSearchModal() {
+            searchModal.classList.add('hidden');
+        }
+
+        /**
+         * Generates a new Glitchobject name and description using Gemini API.
+         */
+        async function generateGlitchObjectNameWithAI() {
+            const keyword = glitchNameInput.value.trim();
+            if (!keyword) {
+                generatedObjectName.textContent = "Por favor, introduce una palabra clave.";
+                generatedObjectDescription.textContent = "";
+                glitchNameOutput.classList.remove('hidden');
+                return;
+            }
+
+            glitchNameOutput.classList.add('hidden'); // Hide previous output
+            glitchNameLoading.classList.remove('hidden'); // Show loading spinner
+
+            try {
+                const prompt = `Generate a unique and quirky name for a 'Glitchobject' and a very short (1-2 sentences) description for it, based on the keyword: '${keyword}'. The name should be creative and fit a futuristic/cyberpunk aesthetic. The description should hint at its absurd or glitchy nature. Provide the output in JSON format like {"name": "Generated Name", "description": "Generated Description"}.`;
+
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = {
+                    contents: chatHistory,
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "name": { "type": "STRING" },
+                                "description": { "type": "STRING" }
+                            },
+                            "propertyOrdering": ["name", "description"]
+                        }
+                    }
+                };
+                const apiKey = ""; // Canvas will automatically provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const jsonText = result.candidates[0].content.parts[0].text;
+                    const parsedJson = JSON.parse(jsonText);
+                    generatedObjectName.textContent = parsedJson.name || "Nombre no disponible";
+                    generatedObjectDescription.textContent = parsedJson.description || "Descripción no disponible";
+                    glitchNameOutput.classList.remove('hidden');
+                } else {
+                    generatedObjectName.textContent = "Error al generar el nombre.";
+                    generatedObjectDescription.textContent = "Inténtalo de nuevo.";
+                    glitchNameOutput.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API for name generation:', error);
+                generatedObjectName.textContent = "Problema de conexión con la IA.";
+                generatedObjectDescription.textContent = "Por favor, inténtalo más tarde.";
+                glitchNameOutput.classList.remove('hidden');
+            } finally {
+                glitchNameLoading.classList.add('hidden'); // Hide loading spinner
+            }
+        }
+
+
+        // News Modal Functions
+        const newsModal = document.getElementById('news-modal');
+        function showNewsModal() {
+            newsModal.classList.remove('hidden');
+        }
+        function hideNewsModal() {
+            newsModal.classList.add('hidden');
+        }
+
+        // Menu Overlay Functions
+        const menuOverlay = document.getElementById('menu-overlay');
+        function toggleMenuOverlay() {
+            menuOverlay.classList.toggle('active');
+        }
+
+        // About Modal Functions
+        const aboutModal = document.getElementById('about-modal');
+        function showAboutModal() {
+            aboutModal.classList.remove('hidden');
+        }
+        function hideAboutModal() {
+            aboutModal.classList.add('hidden');
+        }
+
+        // Contact Modal Functions
+        const contactModal = document.getElementById('contact-modal');
+        function showContactModal() {
+            contactModal.classList.remove('hidden');
+        }
+        function hideContactModal() {
+            contactModal.classList.add('hidden');
+        }
+
+        // Blog Modal Functions
+        const blogModal = document.getElementById('blog-modal');
+        function showBlogModal() {
+            blogModal.classList.remove('hidden');
+        }
+        function hideBlogModal() {
+            blogModal.classList.add('hidden');
+        }
+
+        // --- Achievements Modal Functions (NEW) ---
+        const achievementsModal = document.getElementById('achievements-modal');
+        const achievementViewsCount = document.getElementById('achievement-views-count');
+        const achievementViewsBar = document.getElementById('achievement-views-bar');
+        const achievementStoriesCount = document.getElementById('achievement-stories-count');
+        const achievementStoriesBar = document.getElementById('achievement-stories-bar');
+        const achievementPurchasesCount = document.getElementById('achievement-purchases-count');
+        const achievementPurchasesBar = document.getElementById('achievement-purchases-bar');
+
+        function initializeAchievements() {
+            const defaultAchievements = {
+                glitchObjectsViewed: 0,
+                storiesGenerated: 0,
+                purchasesMade: 0
+            };
+            let achievements = JSON.parse(localStorage.getItem('glitchAchievements')) || defaultAchievements;
+            localStorage.setItem('glitchAchievements', JSON.stringify(achievements));
+            updateAchievementsDisplay();
+        }
+
+        function incrementAchievement(type) {
+            let achievements = JSON.parse(localStorage.getItem('glitchAchievements'));
+            if (achievements) {
+                achievements[type]++;
+                localStorage.setItem('glitchAchievements', JSON.stringify(achievements));
+                updateAchievementsDisplay();
+            }
+        }
+
+        function updateAchievementsDisplay() {
+            const achievements = JSON.parse(localStorage.getItem('glitchAchievements'));
+            if (achievements) {
+                // Explorador de la Red Corrupta
+                achievementViewsCount.textContent = achievements.glitchObjectsViewed;
+                const viewsProgress = Math.min((achievements.glitchObjectsViewed / 100) * 100, 100);
+                achievementViewsBar.style.width = `${viewsProgress}%`;
+
+                // Narrador de Anomalías
+                achievementStoriesCount.textContent = achievements.storiesGenerated;
+                const storiesProgress = Math.min((achievements.storiesGenerated / 50) * 100, 100);
+                achievementStoriesBar.style.width = `${storiesProgress}%`;
+
+                // Comprador de Errores
+                achievementPurchasesCount.textContent = achievements.purchasesMade;
+                const purchasesProgress = Math.min((achievements.purchasesMade / 10) * 100, 100);
+                achievementPurchasesBar.style.width = `${purchasesProgress}%`;
+            }
+        }
+
+        function showAchievementsModal() {
+            updateAchievementsDisplay(); // Update display every time it's opened
+            achievementsModal.classList.remove('hidden');
+        }
+
+        function hideAchievementsModal() {
+            achievementsModal.classList.add('hidden');
+        }
+
+        // --- My Collection Modal Functions (NEW) ---
+        const myCollectionModal = document.getElementById('my-collection-modal');
+        const collectionGrid = document.getElementById('collection-grid');
+        const emptyCollectionMessage = document.getElementById('empty-collection-message');
+
+        function initializeCollection() {
+            let collection = JSON.parse(localStorage.getItem('glitchCollection')) || [];
+            localStorage.setItem('glitchCollection', JSON.stringify(collection));
+        }
+
+        function addGlitchobjectToCollection(object) {
+            let collection = JSON.parse(localStorage.getItem('glitchCollection'));
+            // Prevent duplicates
+            if (!collection.some(item => item.id === object.id)) {
+                collection.push(object);
+                localStorage.setItem('glitchCollection', JSON.stringify(collection));
+                // Optional: show a small notification that item was added
+            }
+        }
+
+        function updateCollectionDisplay() {
+            const collection = JSON.parse(localStorage.getItem('glitchCollection'));
+            collectionGrid.innerHTML = ''; // Clear previous items
+
+            if (collection.length === 0) {
+                emptyCollectionMessage.classList.remove('hidden');
+            } else {
+                emptyCollectionMessage.classList.add('hidden');
+                collection.forEach(obj => {
+                    const item = document.createElement('div');
+                    item.className = 'bg-gray-800 rounded-lg shadow-md p-2 flex flex-col items-center text-center';
+                    item.innerHTML = `
+                        <div class="relative w-24 h-24 bg-gray-700 flex items-center justify-center rounded-md overflow-hidden mb-2">
+                            <div class="spinner absolute" style="display: block;"></div>
+                            <img src="${obj.imageUrl}" alt="Image of ${obj.name}" class="w-full h-full object-cover rounded-md transition-opacity duration-300 opacity-0"
+                                 onload="this.style.opacity='1'; this.previousElementSibling.style.display='none';"
+                                 onerror="this.src='https://images.unsplash.com/photo-1549490349-011218520297?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=600&h=400&fit=crop'; this.style.opacity='1'; this.previousElementSibling.style.display='none';">
+                        </div>
+                        <p class="text-sm font-semibold text-purple-300">${obj.name}</p>
+                    `;
+                    // Make items clickable to view in buy.html
+                    item.addEventListener('click', () => {
+                        sessionStorage.setItem('selectedGlitchobject', JSON.stringify(obj));
+                        window.location.href = `buy.html?id=${obj.id}`;
+                    });
+                    collectionGrid.appendChild(item);
+                });
+            }
+        }
+
+        function showMyCollectionModal() {
+            updateCollectionDisplay();
+            myCollectionModal.classList.remove('hidden');
+        }
+
+        function hideMyCollectionModal() {
+            myCollectionModal.classList.add('hidden');
+        }
+
+        // --- Mini-Game Modal Functions (NEW) ---
+        const miniGameModal = document.getElementById('mini-game-modal');
+        const gameArea = document.getElementById('game-area');
+        const glitchTarget = document.getElementById('glitch-target');
+        const gameInstruction = document.getElementById('game-instruction');
+        const gameTimerDisplay = document.getElementById('game-timer');
+        const gameScoreDisplay = document.getElementById('game-score');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const gameResult = document.getElementById('game-result');
+        const gameResultText = document.getElementById('game-result-text');
+        const claimRewardBtn = document.getElementById('claim-reward-btn');
+
+        let gameInterval;
+        let targetMoveInterval;
+        let gameTime = 10;
+        let gameScore = 0;
+        let gameRunning = false;
+
+        function showMiniGameModal() {
+            miniGameModal.classList.remove('hidden');
+            resetGame();
+        }
+
+        function hideMiniGameModal() {
+            miniGameModal.classList.add('hidden');
+            stopGame();
+        }
+
+        function resetGame() {
+            stopGame();
+            gameTime = 10;
+            gameScore = 0;
+            gameTimerDisplay.textContent = `Tiempo: ${gameTime}s`;
+            gameScoreDisplay.textContent = `Puntos: ${gameScore}`;
+            gameInstruction.classList.remove('hidden');
+            glitchTarget.classList.add('hidden');
+            startGameBtn.classList.remove('hidden');
+            gameResult.classList.add('hidden');
+            claimRewardBtn.classList.add('hidden');
+        }
+
+        function startGame() {
+            resetGame();
+            gameRunning = true;
+            gameInstruction.classList.add('hidden');
+            glitchTarget.classList.remove('hidden');
+            startGameBtn.classList.add('hidden');
+
+            gameInterval = setInterval(() => {
+                gameTime--;
+                gameTimerDisplay.textContent = `Tiempo: ${gameTime}s`;
+                if (gameTime <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            moveGlitchTarget(); // Initial position
+            targetMoveInterval = setInterval(moveGlitchTarget, 800); // Move every 0.8 seconds
+        }
+
+        function moveGlitchTarget() {
+            const maxX = gameArea.clientWidth - glitchTarget.clientWidth;
+            const maxY = gameArea.clientHeight - glitchTarget.clientHeight;
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            glitchTarget.style.left = `${newX}px`;
+            glitchTarget.style.top = `${newY}px`;
+        }
+
+        glitchTarget.addEventListener('click', () => {
+            if (gameRunning) {
+                gameScore++;
+                gameScoreDisplay.textContent = `Puntos: ${gameScore}`;
+                moveGlitchTarget(); // Move immediately after click
+            }
+        });
+
+        function endGame() {
+            stopGame();
+            gameRunning = false;
+            glitchTarget.classList.add('hidden');
+            gameResult.classList.remove('hidden');
+
+            if (gameScore >= 5) { // Win condition
+                gameResultText.textContent = `¡Desencriptación Exitosa! Ganaste ${gameScore} puntos.`;
+                claimRewardBtn.classList.remove('hidden');
+                // Store reward status in localStorage
+                localStorage.setItem('glitchGameRewardClaimable', 'true');
+            } else {
+                gameResultText.textContent = `¡Fallo de Desencriptación! Obtuviste ${gameScore} puntos. Intenta de nuevo.`;
+            }
+        }
+
+        function stopGame() {
+            clearInterval(gameInterval);
+            clearInterval(targetMoveInterval);
+        }
+
+        claimRewardBtn.addEventListener('click', () => {
+            // In a real app, this would give a special item or discount.
+            // For now, let's generate a special Glitchobject and add it to the collection.
+            if (localStorage.getItem('glitchGameRewardClaimable') === 'true') {
+                const rewardObject = new RareObject(crypto.randomUUID()); // New unique ID
+                rewardObject.name = `Glitch-Recompensa: ${generateObjectName()}`;
+                rewardObject.description = `¡Un objeto especial obtenido por desencriptar el glitch! Es ${generateObjectDescription().toLowerCase()}.`;
+                rewardObject.price = (Math.random() * (199.99 - 50.00) + 50.00).toFixed(2); // Higher value
+
+                addGlitchobjectToCollection(rewardObject);
+                alert(`¡Recompensa reclamada! "${rewardObject.name}" ha sido añadido a tu colección.`);
+                localStorage.removeItem('glitchGameRewardClaimable'); // Reward claimed
+                hideMiniGameModal();
+                showMyCollectionModal(); // Show collection with new item
+            } else {
+                alert("No hay recompensa pendiente para reclamar.");
+            }
+        });
+
+        startGameBtn.addEventListener('click', startGame);
+
+
+        // --- Glitch del Día Logic ---
+        const dailyGlitchContainer = document.getElementById('daily-glitch-container');
+        const dailyGlitchImage = document.getElementById('daily-glitch-image');
+        const dailyGlitchName = document.getElementById('daily-glitch-name');
+        const dailyGlitchDescription = document.getElementById('daily-glitch-description');
+        const dailyGlitchPrice = document.getElementById('daily-glitch-price');
+        const dailyGlitchLink = document.getElementById('daily-glitch-link');
+
+        async function loadDailyGlitch() {
+            const today = new Date().toDateString();
+            let storedDailyGlitch = JSON.parse(localStorage.getItem('dailyGlitchObject'));
+            let lastGeneratedDate = localStorage.getItem('lastGeneratedDate');
+
+            let currentDailyGlitch;
+
+            if (storedDailyGlitch && lastGeneratedDate === today) {
+                // Use stored object if it's from today
+                currentDailyGlitch = storedDailyGlitch;
+            } else {
+                // Generate a new object if it's a new day or no object stored
+                currentDailyGlitch = new RareObject();
+                currentDailyGlitch.name = `Glitch del Día: ${generateObjectName()}`;
+                currentDailyGlitch.description = `¡La anomalía más reciente! Este ${currentDailyGlitch.name.toLowerCase()} es ${generateObjectDescription().toLowerCase()}.`;
+                currentDailyGlitch.price = (Math.random() * (299.99 - 19.99) + 19.99).toFixed(2); // Random price
+                
+                // Generate a more elaborate story for the daily glitch
+                const prompt = `Generate a unique, very detailed, and captivating origin story (around 5-7 sentences) for the 'Glitch del Día' named '${currentDailyGlitch.name}' which is described as '${currentDailyGlitch.description}'. Focus on its discovery, its peculiar properties, and why it's a significant digital anomaly. Make it sound like a rare find in a cyberpunk universe.`;
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                        currentDailyGlitch.story = result.candidates[0].content.parts[0].text;
+                    } else {
+                        currentDailyGlitch.story = "Una historia encriptada que aún no ha sido revelada...";
+                    }
+                } catch (error) {
+                    console.error("Error generating daily glitch story:", error);
+                    currentDailyGlitch.story = "Una historia encriptada que aún no ha sido revelada debido a una falla en la red.";
+                }
+
+                localStorage.setItem('dailyGlitchObject', JSON.stringify(currentDailyGlitch));
+                localStorage.setItem('lastGeneratedDate', today);
+            }
+
+            dailyGlitchImage.src = currentDailyGlitch.imageUrl;
+            dailyGlitchImage.alt = `Image of ${currentDailyGlitch.name}`;
+            dailyGlitchName.textContent = currentDailyGlitch.name;
+            dailyGlitchDescription.textContent = currentDailyGlitch.description;
+            dailyGlitchPrice.textContent = `$${currentDailyGlitch.price} USD`;
+
+            // Set up the link to buy.html, passing the daily glitch object
+            dailyGlitchLink.onclick = (e) => {
+                e.preventDefault();
+                sessionStorage.setItem('selectedGlitchobject', JSON.stringify(currentDailyGlitch));
+                window.location.href = `buy.html?id=${currentDailyGlitch.id}`;
+            };
+        }
+
+
+        // DOMContentLoaded ensures the script runs after the HTML is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselContainer = document.getElementById('carousel-container');
+            const productsGrid = document.getElementById('products-grid');
+            const carouselPrevBtn = document.getElementById('carousel-prev');
+            const carouselNextBtn = document.getElementById('carousel-next');
+
+            // Initialize global objects once when the page loads
+            initializeGlobalObjects(50); // Generate a good number of objects
+
+            // Initialize achievements and collection
+            initializeAchievements();
+            initializeCollection();
+
+            // Load and display the daily glitch
+            loadDailyGlitch();
+
+            // Clear initial loading messages
+            carouselContainer.innerHTML = '';
+            productsGrid.innerHTML = '';
+
+            // Populate carousel items from the global list
+            allGeneratedObjects.slice(0, 10).forEach(obj => { // Take first 10 for carousel
+                carouselContainer.appendChild(createCarouselItem(obj));
+            });
+
+            // Populate product grid items from the global list
+            allGeneratedObjects.slice(10, 22).forEach(obj => { // Take next 12 for grid
+                productsGrid.appendChild(createProductCard(obj));
+            });
+
+            // Carousel Navigation Logic
+            let scrollAmount = 0;
+            const itemWidth = 288; // 64 (w-64) + 24 (space-x-6) = 256 + 24 = 280px (approx)
+                                  // For w-80 (320px) + 24px = 344px. Let's use 300px as a safe step.
+            const scrollStep = 300; // Adjust based on item width + gap
+
+            carouselNextBtn.addEventListener('click', () => {
+                scrollAmount += scrollStep;
+                carouselContainer.scroll({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+                // Reset scroll if it goes too far
+                if (scrollAmount >= carouselContainer.scrollWidth - carouselContainer.clientWidth) {
+                    scrollAmount = 0; // Loop back to start
+                }
+            });
+
+            carouselPrevBtn.addEventListener('click', () => {
+                scrollAmount -= scrollStep;
+                carouselContainer.scroll({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+                // Loop to end if it goes too far back
+                if (scrollAmount < 0) {
+                    scrollAmount = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+                }
+            });
+
+            // Optional: Auto-scroll carousel
+            let autoScrollInterval;
+            const startAutoScroll = () => {
+                autoScrollInterval = setInterval(() => {
+                    carouselNextBtn.click();
+                }, 4000); // Scroll every 4 seconds
+            };
+
+            const stopAutoScroll = () => {
+                clearInterval(autoScrollInterval);
+            };
+
+            // Pause auto-scroll on hover
+            carouselContainer.addEventListener('mouseenter', stopAutoScroll);
+            carouselContainer.addEventListener('mouseleave', startAutoScroll);
+            carouselNextBtn.addEventListener('mouseenter', stopAutoScroll);
+            carouselPrevBtn.addEventListener('mouseenter', stopAutoScroll);
+            carouselNextBtn.addEventListener('mouseleave', startAutoScroll);
+            carouselPrevBtn.addEventListener('mouseleave', startAutoScroll);
+        });
+    </script>
+
+    <!-- Schema.org JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "GLITCHOBJECTS",
+      "image": "https://placehold.co/1200x630/4A00B0/FFFFFF?text=GLITCHOBJECTS_LOGO",
+      "url": "https://www.glitchobjects.com",
+      "description": "Tienda de objetos digitales con estética glitch y diseño futurista.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "San Juan",
+        "addressCountry": "AR"
+      },
+      "sameAs": [
+        "https://www.instagram.com/porthoarg",
+        "https://www.twitter.com/glitchobjects"
+      ]
+    }
+    </script>
+</body>
+</html>
