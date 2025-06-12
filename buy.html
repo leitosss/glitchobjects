@@ -194,10 +194,10 @@
                     🛒 Comprar Ahora
                 </button>
                 <button id="object-story-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-md hover:from-purple-700 hover:to-pink-700 transition-all duration-300 text-sm flex items-center justify-center">
-                    ✨ Generar Historia Glitch ✨
+                    ✨ conocer historia ✨
                 </button>
                 <button id="marketing-pitch-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 text-sm flex items-center justify-center">
-                    ✨ Generar Argumento de Marketing ✨
+                    ✨ el porque comprarlo ✨
                 </button>
                 <button id="add-to-collection-btn" class="mt-4 w-full py-2 px-4 bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold rounded-md hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 text-sm flex items-center justify-center">
                     📦 Guardar en mi Colección
@@ -366,7 +366,7 @@
             }
 
             try {
-                const prompt = `Generate a short, quirky, and slightly absurd origin story or purpose for a 'Glitchobject' named '${objectName}' which is currently described as '${objectDescription}'. Focus on its 'glitch' or 'digital anomaly' aspect. Make it sound like it emerged from a digital error or a corrupted data stream, suitable for a futuristic, cyberpunk aesthetic. Keep it concise, around 3-4 sentences.`;
+                const prompt = `Generate a short, quirky, and slightly absurd origin story or purpose for a 'Glitchobject' named '${objectName}' which is currently described as '${objectDescription}'. Focus on its 'glitch' or 'digital anomaly' aspect. Make it sound like it emerged from a digital error or a corrupted data stream, suitable for a futuristic, cyberpunk aesthetic. Keep it concise, around 3-4 sentences in spanish.`;
 
                 let chatHistory = [];
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
@@ -412,7 +412,7 @@
             marketingPitchLoading.classList.remove('hidden');
 
             try {
-                const prompt = `Generate a short, compelling, and quirky marketing pitch (2-3 sentences) for a 'Glitchobject' named '${objectName}' which is described as '${objectDescription}' and costs ${objectPrice}. The pitch should appeal to a teenage audience, highlighting its unique, absurd, or futuristic qualities. Make it sound like an advertisement for something truly bizarre and desirable.`;
+                const prompt = `Generate a short, compelling, and quirky marketing pitch (2-3 sentences) for a 'Glitchobject' named '${objectName}' which is described as '${objectDescription}' and costs ${objectPrice}. The pitch should appeal to a teenage audience, highlighting its unique, absurd, or futuristic qualities. Make it sound like an advertisement for something truly bizarre and desirable in spanish.`;
 
                 let chatHistory = [];
                 chatHistory.push({ role: "user", parts: [{ text: prompt }] });
